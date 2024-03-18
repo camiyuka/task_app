@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Tasks Application</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label"> Tarefas pendentes</string>
+    <string name="second_fragment_label"> Todas as tarefas</string>
+    <string name="all_tasks"> Visualizar todas</string>
+    <string name="pending_tasks"> Anterior </string>
+    <string name="text_view_pending"> Text view string </string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet ...
+    </string>
+    <string name="textview">TextView</string>
+</resources>
