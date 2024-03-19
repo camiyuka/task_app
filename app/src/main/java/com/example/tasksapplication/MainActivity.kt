@@ -9,12 +9,12 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.EditText
 import com.example.tasksapplication.databinding.ActivityMainBinding
-import android.widget.TextView
-
+import androidx.appcompat.app.AlertDialog
 
 class MainActivity : AppCompatActivity() {
-    // vai iniciar depois - lateinit
+    // Vai inicializar depois - lateinit
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
@@ -31,17 +31,33 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.fab.setOnClickListener { view ->
-            val text = "Hello Catatau!"
-            var textView = findViewById<TextView>(R.id.textView_pending_tasks)
-            if (textView != null)
-                textView.setText(textView.text.toString() + "\n" + text)
-            else {
-                textView = findViewById<TextView>(R.id.textView_all)
-                textView.setText(textView.text.toString() + "\nHello Tubas!")
+            val task = Task(title = "Intervalo", description = "Não tem")
+
+            val popupTitulo = AlertDialog.Builder(this)
+            popupTitulo.setTitle("To Do:")
+            val textTitulo = EditText(this)
+            popupTitulo.setView(textTitulo)
+
+            val popupDescricao = AlertDialog.Builder(this)
+            popupDescricao.setTitle("Descrição:")
+            val textDescricao = EditText(this)
+            popupDescricao.setView(textDescricao)
+
+
+            popupTitulo.setPositiveButton("Ok") { dialog, _ ->
+                val titulo = textTitulo.text.toString()
+                task.title = titulo // Atualiza o título da tarefa com o texto digitado
+                Snackbar.make(view, "Tarefa salva: $task", Snackbar.LENGTH_LONG).show()
+            }
+            popupTitulo.setNegativeButton("Cancelar"){ dialog, _ ->
+                dialog.cancel()
             }
 
-        }
+            popupTitulo.show()
 
+
+        }
+    }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
